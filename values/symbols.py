@@ -1,0 +1,2 @@
+symbolsArith = ["+", "-"]
+symbolsMult = ["/", "*"]
