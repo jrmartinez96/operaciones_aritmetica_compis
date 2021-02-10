@@ -10,7 +10,7 @@ good_input = False
 while not good_input:
     operation = input("Enter the arithmetic operation: ")
     operation = operation.replace(" ", "")
-    match = re.fullmatch("(([0-9])+[\/\+\-\*])+([0-9])", operation)
+    match = re.fullmatch("([0-9]*\.?[0-9]+[\/\+\-\*])+([0-9]*\.?[0-9]+)", operation)
     if match != None:
         good_input = True
     else:

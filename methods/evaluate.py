@@ -25,6 +25,16 @@ def is_arith(operation):
     return isArithInOp
 
 
+# Evalua si existe operacion de exponente
+def is_exp(operation):
+    isArithInOp = False
+    for character in operation:
+        if character == "^":
+            isArithInOp = True
+    
+    return isArithInOp
+
+
 # Hace la primera multiplicacion o division que encuentre de izquierda a derecha
 def eval_mult(operation):
     i_symbol = 0
@@ -87,12 +97,45 @@ def eval_arith(operation):
         return operation_copy
     
     return operation
+
+
+# Hace la primera operacion de exponente que encuentre de izquierda a derecha
+def eval_exp(operation):
+    i_symbol = 0
+
+    i = 0
+    for character in operation:
+        if i_symbol == 0 and character == "^":
+            i_symbol = i
+        i += 1
+    
+    if i_symbol != 0:
+        first_number = float(operation[i_symbol - 1])
+        second_number = float(operation[i_symbol + 1])
+
+        result = first_number ** second_number
         
+        operation_copy = operation.copy()
+
+        del operation_copy[i_symbol + 1]
+        del operation_copy[i_symbol]
+        operation_copy[i_symbol - 1] = str(result)
+
+        return operation_copy
+    
+    return operation
 
 # Realiza todas las evaluaciones y devuelve el resultado de la operacion
 def evaluate(operation):
     check_mult = True
     check_arith = True
+    check_exp = True
+
+    while check_exp:
+        if is_exp(operation):
+            operation = eval_exp(operation)
+        else:
+            check_exp = False
 
     while check_mult:
         if is_mult(operation):

@@ -5,7 +5,7 @@ def tokenization(operation):
 
     for character in operation:
         try:
-            int(character)
+            float(characters[i] + character)
             characters[i] = characters[i] + character
         except:
             characters.append(character)
